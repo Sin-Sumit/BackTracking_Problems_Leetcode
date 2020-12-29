@@ -1,0 +1,29 @@
+Problem: 40. Combination Sum II
+
+class Solution {
+public:
+    void solve(vector<int> &candidates,int target, vector<vector<int>> &vec, vector<int> &v,int j){
+        if (target==0){
+            vec.push_back(v);
+            return;
+        }
+        if (target<0)
+            return;
+        if (j>=candidates.size())
+            return;
+        for(int i=j;i<candidates.size();++i){
+            if (i>j && candidates[i]==candidates[i-1]) continue;
+            v.push_back(candidates[i]);
+            solve(candidates,target-candidates[i],vec,v,i+1);
+            v.pop_back();
+            // solve(candidates,target,vec,v,j+1);
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        vector<vector<int>> vec;
+        vector<int> v;
+        sort(candidates.begin(),candidates.end());
+        solve(candidates,target,vec,v,0);
+        return vec;
+    }
+};
