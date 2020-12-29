@@ -1,0 +1,31 @@
+Problem: 17. Letter Combinations of a Phone Number
+This is the final solution which is correct.
+
+class Solution {
+public:
+    void combination(string d, string res, vector<string> &ress, int index, vector<string> &keypad){
+        if (index==-1){
+            ress.push_back(res);
+            return;
+        }
+        int dig=d[index]-'0';
+        // cout<<dig<<endl;
+        for (int i=0;i<keypad[dig].size();++i){
+            combination(d,keypad[dig][i]+res,ress,index-1,keypad);
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        vector<string> ress;
+        if (digits.size()==0)
+            return ress;
+        string res;
+        vector<string> keypad={
+            {},{},{'a','b','c'},{'d','e','f'},{'g','h','i'},{'j','k','l'},{'m','n','o'},{'p','q','r','s'},{'t','u','v'},{'w','x','y','z'}
+        };
+        
+        int index=digits.size();
+        // cout<<keypad[2][1]<<endl;
+        combination(digits, res, ress, index-1, keypad);
+        return ress;
+    }
+};
