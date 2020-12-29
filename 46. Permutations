@@ -1,0 +1,29 @@
+Problem: 46. Permutations
+
+class Solution {
+public:
+    void swap(vector<int> &nums,int i,int j){
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+    void generate(vector<int> &nums, vector<vector<int>> &v,vector<int> &vec, int j){
+        if (vec.size()==nums.size()){
+            v.push_back(vec);
+            return;
+        }
+        for (int i=j;i<nums.size();++i){
+            swap(nums,i,j);
+            vec.push_back(nums[j]);
+            generate(nums,v,vec,j+1);
+            swap(nums,i,j);
+            vec.pop_back();
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> v;
+        vector<int> vec;
+        generate(nums,v,vec,0);
+        return v;
+    }
+};
