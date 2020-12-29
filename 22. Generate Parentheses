@@ -1,0 +1,29 @@
+Problem: 22. Generate Parentheses
+Generate Parentheses which are valid for a particular number n.
+
+class Solution {
+public:
+    void solve(int op, int cl, string s, vector<string> &vec){
+        if (op==0 && cl==0){
+            vec.push_back(s);
+            return;
+        }
+        if (op!=0){
+            s+='(';
+            solve(op-1,cl,s,vec);
+            s.pop_back();
+        }
+        if (cl>op){
+            s+=')';
+            solve(op,cl-1,s,vec);
+            s.pop_back();
+        }        
+    }
+    vector<string> generateParenthesis(int n) {
+        int op=n,cl=n;
+        string ss="";
+        vector<string> vec;
+        solve(op,cl,ss,vec);
+        return vec;
+    }
+};
