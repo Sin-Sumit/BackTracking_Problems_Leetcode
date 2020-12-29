@@ -1,0 +1,26 @@
+Problem: 39. Combination Sum
+
+class Solution {
+public:
+    void solve(vector<int> &candidates,int target, vector<vector<int>> &vec, vector<int> &v,int j){
+        if (target==0){
+            vec.push_back(v);
+            return;
+        }
+        if (target<0)
+            return;
+        if (j>=candidates.size())
+            return;
+        v.push_back(candidates[j]);
+        solve(candidates,target-candidates[j],vec,v,j);
+        v.pop_back();
+        solve(candidates,target,vec,v,j+1);
+        
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> vec;
+        vector<int> v;
+        solve(candidates,target,vec,v,0);
+        return vec;
+    }
+};
