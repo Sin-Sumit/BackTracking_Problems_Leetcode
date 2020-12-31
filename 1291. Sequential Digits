@@ -1,0 +1,18 @@
+1291. Sequential Digits
+
+class Solution:
+    def sequentialDigits(self, low: int, high: int) -> List[int]:
+        d='123456789'
+        l=len(str(low))
+        h=len(str(high))
+        res=[]
+        for i in range(l,h+1):
+            for j in range(len(d)):
+                if (i+j)<=len(d):
+                    num=int(d[j:i+j])
+                    if num<low:
+                        continue
+                    if num<=high:
+                        res.append(num)
+        return res
+        
