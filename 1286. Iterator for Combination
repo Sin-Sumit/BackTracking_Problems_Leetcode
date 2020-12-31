@@ -1,0 +1,34 @@
+1286. Iterator for Combination
+
+class CombinationIterator {
+public:
+    queue<string> q;
+    void solve(string &characters, int combinationLength, string &ss,int j){
+        if (ss.size()==combinationLength){
+            q.push(ss);
+            return;
+        }
+        for (int i=j;i<characters.size();++i){
+            ss+=characters[i];
+            solve(characters, combinationLength, ss, i+1);
+            ss.pop_back();
+        }
+    }
+    CombinationIterator(string characters, int combinationLength) {
+        string ss;
+        solve(characters,combinationLength,ss,0);
+    }
+    
+    string next() {
+        string a;
+        a=q.front();
+        q.pop();
+        return a;
+    }
+    
+    bool hasNext() {
+        if (!q.empty())
+            return true;
+        return false;
+    }
+};
